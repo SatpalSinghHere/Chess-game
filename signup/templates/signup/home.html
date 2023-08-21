@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        
+    </script>
+</head>
+<body>
+    <h1>Welcome {{ username }}</h1><br>
+    <input type="button" value="GENERATE CODE" onclick="generate()">
+    <div id="room_code">
+
+    </div><br>
+    <input id="join_room" type="submit" value="JOIN ROOM" disabled="true" onclick="join_room()">
+    
+    <a href="{% url 'signup:login' %}">Log Out</a>    
+</body>
+<script>
+    function generate(){
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let room_code = '';
+        for(var i=0; i<6; i++){
+            var random = Math.floor(Math.random() * characters.length);
+            var char = characters[random];
+            room_code += characters.charAt(random);
+        }
+        document.getElementById("room_code").innerHTML = room_code;
+        document.getElementById("join_room").disabled = false;
+    }
+    function join_room(){
+        room_code = document.getElementById("room_code").innerHTML;
+        window.location.pathname = "/game/" + room_code + "/{{ username }}";
+    }
+</script>
+</html>

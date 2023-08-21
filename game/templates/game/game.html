@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'game/style.css' %}">
+    <script src="{% static 'game/script.js' %}"></script>
+    <!-- <script type="module" src="script/rook.js"></script> -->
+    {{ room_name|json_script:"room-name" }}
+    {{ username|json_script:"username" }}
+</head>
+<body>
+    <div id="lock"></div>
+    <div class="game_area">
+        <div class="container">
+            <h3 class="name" id="opponent">Black</h3>
+            <div class="drawer" id="opponent"></div>
+        </div>
+        
+        <div class="board">
+            <div class="row" id="8">
+                <div class="block white" id="8A">&#9820;</div>
+                <div class="block black" id="8B">&#9822;</div>
+                <div class="block white" id="8C">&#9821;</div>
+                <div class="block black" id="8D">&#9819;</div>
+                <div class="block white" id="8E">&#9818;</div>
+                <div class="block black" id="8F">&#9821;</div>
+                <div class="block white" id="8G">&#9822;</div>            
+                <div class="block black" id="8H">&#9820;</div>
+            </div>
+            <div class="row" id="7">
+                <div class="block black" id="7A">&#9823;</div>
+                <div class="block white" id="7B">&#9823;</div>
+                <div class="block black" id="7C">&#9823;</div>
+                <div class="block white" id="7D">&#9823;</div>
+                <div class="block black" id="7E">&#9823;</div>
+                <div class="block white" id="7F">&#9823;</div>
+                <div class="block black" id="7G">&#9823;</div>
+                <div class="block white" id="7H">&#9823;</div>
+            </div>
+            <div class="row" id="6">
+                <div class="block white" id="6A"></div>
+                <div class="block black" id="6B"></div>
+                <div class="block white" id="6C"></div>
+                <div class="block black" id="6D"></div>
+                <div class="block white" id="6E"></div>
+                <div class="block black" id="6F"></div>
+                <div class="block white" id="6G"></div>
+                <div class="block black" id="6H"></div>
+            </div>
+            <div class="row" id="5">
+                <div class="block black" id="5A"></div>
+                <div class="block white" id="5B"></div>
+                <div class="block black" id="5C"></div>
+                <div class="block white" id="5D"></div>
+                <div class="block black" id="5E"></div>
+                <div class="block white" id="5F"></div>
+                <div class="block black" id="5G"></div>
+                <div class="block white" id="5H"></div>
+            </div>
+            <div class="row" id="4">
+                <div class="block white" id="4A"></div>
+                <div class="block black" id="4B"></div>
+                <div class="block white" id="4C"></div>
+                <div class="block black" id="4D"></div>
+                <div class="block white" id="4E"></div>
+                <div class="block black" id="4F"></div>
+                <div class="block white" id="4G"></div>
+                <div class="block black" id="4H"></div>
+            </div>
+            <div class="row" id="3">
+                <div class="block black" id="3A"></div>
+                <div class="block white" id="3B"></div>
+                <div class="block black" id="3C"></div>
+                <div class="block white" id="3D"></div>
+                <div class="block black" id="3E"></div>
+                <div class="block white" id="3F"></div>
+                <div class="block black" id="3G"></div>
+                <div class="block white" id="3H"></div>
+            </div>
+            <div class="row" id="2">
+                <div class="block white" id="2A">&#9817;</div>
+                <div class="block black" id="2B">&#9817;</div>
+                <div class="block white" id="2C">&#9817;</div>
+                <div class="block black" id="2D">&#9817;</div>
+                <div class="block white" id="2E">&#9817;</div>
+                <div class="block black" id="2F">&#9817;</div>
+                <div class="block white" id="2G">&#9817;</div>
+                <div class="block black" id="2H">&#9817;</div>
+            </div>
+            <div class="row" id="1">
+                <div class="block black" id="1A">&#9814;</div>
+                <div class="block white" id="1B">&#9816;</div>
+                <div class="block black" id="1C">&#9815;</div>
+                <div class="block white" id="1D">&#9813;</div>
+                <div class="block black" id="1E">&#9812;</div>
+                <div class="block white" id="1F">&#9815;</div>
+                <div class="block black" id="1G">&#9816;</div>
+                <div class="block white" id="1H">&#9814;</div>
+            </div>
+        </div>
+        <div class="container">
+            <h3 class="name" id="player">White</h3>
+            <div class="drawer" id="player"></div>
+        </div>
+    </div>
+    <div id="popup">
+        <div id="close">&times;</div>
+    </div>
+    <div id="overlay"></div>
+    <script>
+        var audio_url = "{% static 'game/audio' %}";
+    </script>
+    
+</body>
+</html>

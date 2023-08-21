@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="message">
+        <h3 style="color: red;">
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </h3>
+    </div>
+    <form action="{% url 'signup:login' %}" method="post">
+        {% csrf_token %}
+        <input type="text" id="player_name" name="player_name" placeholder="Player Name">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="submit" value="Log In" >
+    </form>
+
+    <a href="{% url 'signup:signup' %}">New User? Click here to Sign up</a>
+</body>
+</html>
