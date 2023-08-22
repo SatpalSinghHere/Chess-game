@@ -1,0 +1,11 @@
+services:
+  redis:
+    image: redis:5
+    ports:
+      - 6379:6379
+  
+  chess:
+    image: chess-image:1.0
+    ports:
+      - 8000:8000
+    
