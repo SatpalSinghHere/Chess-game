@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zr=^b)@wdwdp^(jm@j47ot*2@zo)k7tzd(&4&r2qx^2(&ali97
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.1.112']
 
 
 # Application definition
@@ -69,14 +69,15 @@ TEMPLATES = [
         },
     },
 ]
-
+REDIS_HOST = 'redis'
+REDIS_PORT = 6379
 WSGI_APPLICATION = 'chess.wsgi.application'
 ASGI_APPLICATION = 'chess.asgi.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
         },
     },
 }

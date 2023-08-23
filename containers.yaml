@@ -6,6 +6,13 @@ services:
   
   chess:
     image: chess-image:1.0
+    
+    depends_on:
+      - redis
     ports:
       - 8000:8000
+    
+    
+
+ 
     
