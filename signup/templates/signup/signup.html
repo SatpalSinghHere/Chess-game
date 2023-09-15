@@ -1,28 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends "./layout.html" %}
+{% load static %}
+{% block body %}
+
 <body>
-    <div class="message">
-        <h3 style="color: red;">
-            {% if message %}
-                <p>{{ message }}</p>
-            {% endif %}
-        </h3>
-        
+
+    <img id="icon" src="{% static 'signup/images/whitequeen.png' %}" alt="">
+    <div class="container">
+        <div class="contents">
+            <form action="{% url 'signup:signup' %}" method="post">
+                {% csrf_token %}
+                <input class="textbox" id="name" type="text" placeholder="User Name" name="name">
+                <input class="textbox" id="pwd1" type="password" placeholder="Create Password" name="password1">
+                <input class="textbox" id="pwd2" type="password" placeholder="Confirm Password" name="password2">
+                <input class="button" type="submit" value="Sign Up">
+            </form>
+            <button class="button" onclick="login()">Log in</button>
+        </div>
+
     </div>
-    <form action="{% url 'signup:signup' %}" method="post">
-        {% csrf_token %}
-        <input type="text" placeholder="User Name" name="name" >
-        <input type="email" placeholder="Email" name="email">
-        <input type="password" placeholder="Create Password" name="password1">
-        <input type="password" placeholder="Confirm Password" name="password2">
-        <input type="submit" value="Sign Up">
-    </form>
-    
-    <a href="{% url 'signup:login' %}">log in</a>
+    <div class="message">
+
+    </div>
+
+
 </body>
-</html>
+<script>
+    function login() {
+        window.location.href = "{% url 'signup:login' %}";
+    }
+    function msg(message) {
+        let message_div = document.querySelector(".message");
+        message_div.style.visibility = "visible";
+        message_div.textContent = message;
+    }
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+        console.log("checking");
+        let name = document.querySelector("#name").value;
+        const pwd1 = document.querySelector("#pwd1").value;
+        const pwd2 = document.querySelector("#pwd2").value;
+        name = name.trim();
+        if (name == null || name == '') {
+            e.preventDefault();
+            msg("Add a User Name");
+        }
+        else if (pwd1 != pwd2) {
+            e.preventDefault();
+            msg("Passwords do not match")
+        }else{
+            form.submit();
+        }
+        
+        
+    })
+        
+    
+
+</script>
+{% endblock %}

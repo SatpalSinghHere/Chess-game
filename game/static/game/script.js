@@ -930,11 +930,18 @@ document.addEventListener("DOMContentLoaded", () =>{
     const lock = document.querySelector("#lock");
     gameSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        
+        console.log(data.toss);
+        if(data.toss == "room_full"){
+            window.location.pathname = '/room_full/';
+        }
         if(data.room_full == 'room_full'){
             window.location.pathname = '/room_full';
         }
-
+        console.log("opponent = ", data.opponent);
+        if(data.opponent != undefined && data.opponent != ''){
+            document.querySelector(".name#opponent").innerHTML = data.opponent.replace(/['"]+/g, '');
+            document.querySelector(".name#player").innerHTML = my_name.replace(/['"]+/g, '');
+        }
         const launch = data['launch'];
         const land = data['land'];
         console.log("land = ", land);
@@ -957,6 +964,9 @@ document.addEventListener("DOMContentLoaded", () =>{
         }
         
         console.log(data.toss);
+        if(data.toss == "room_full"){
+            window.location.pathname = '/room_full/';
+        }
         if(data.toss == 0){
             console.log("blacked");
             const board = document.querySelector(".board");

@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        
-    </script>
-</head>
+{% extends "./layout.html" %}
+{% load static %}
+{% block body %}
 <body>
     <h1>Welcome {{ username }}</h1><br>
-    <input type="button" value="GENERATE CODE" onclick="generate()">
-    <div id="room_code">
-
-    </div><br>
-    <input id="join_room" type="submit" value="JOIN ROOM" disabled="true" onclick="join_room()">
     
-    <a href="{% url 'signup:login' %}">Log Out</a>    
+    
+      
+    
+    <img id="icon" src="{% static 'signup/images/whitequeen.png' %}" alt="">
+    <div class="container">
+        <div class="contents">
+            <input type="button" class="button" value="CREATE ROOM" onclick="generate()">
+            <div id="created_room_code">
+            </div>
+            <input type="button" class="button" value="Enter Room" id="enter_room" disabled="ture" onclick="enter_room()">
+            <input type="text" class="textbox" placeholder="Enter Room Code" id="entered_room_code">
+            <input id="join_room" class="button" type="button" value="JOIN ROOM" disabled="true" onclick="join_room()">
+
+        </div>
+
+    </div>
+    <a href="{% url 'signup:login' %}">Log Out</a>
 </body>
 <script>
     function generate(){
@@ -27,12 +31,30 @@
             var char = characters[random];
             room_code += characters.charAt(random);
         }
-        document.getElementById("room_code").innerHTML = room_code;
-        document.getElementById("join_room").disabled = false;
+        document.getElementById("created_room_code").innerHTML = room_code;
+        document.getElementById("enter_room").disabled = false;
     }
-    function join_room(){
-        room_code = document.getElementById("room_code").innerHTML;
+    function enter_room(){
+        const room_code = document.getElementById("created_room_code").innerHTML;
+        
         window.location.pathname = "/game/" + room_code + "/{{ username }}";
     }
+    function join_room(){
+        const room_code = document.getElementById("entered_room_code").value;console.log(room_code);
+        window.location.pathname = "/game/" + room_code + "/{{ username }}";
+    }
+    let entered_room_code = document.getElementById("entered_room_code");
+    entered_room_code.onkeyup = function(){
+        let value = entered_room_code.value;
+        console.log(value);
+        value = value.trim();
+        console.log(value);
+        if(value.length > 0){
+            document.getElementById("join_room").disabled = false;
+        }
+        else{
+            document.getElementById("join_room").disabled = true;
+        }
+    }
 </script>
-</html>
+{% endblock %}

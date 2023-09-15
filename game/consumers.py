@@ -51,11 +51,13 @@ class GameConsumer(AsyncWebsocketConsumer):
                     toss2 = 0 if toss1 == 1 else 1
                     user1_channel_name = await database_sync_to_async(get_channel_name)(1, self.room_name)
                     user2_channel_name = await database_sync_to_async(get_channel_name)(2, self.room_name)
+                    user1 = await database_sync_to_async(get_user_name)(1, self.room_name)
+                    user2 = await database_sync_to_async(get_user_name)(2, self.room_name)
                     print("sending")
                     print(user1_channel_name)
                     print(user2_channel_name)
-                    await self.channel_layer.send(user1_channel_name, {"type": "toss", "toss": toss1})
-                    await self.channel_layer.send(user2_channel_name, {"type": "toss", "toss": toss2})
+                    await self.channel_layer.send(user1_channel_name, {"type": "toss", "toss": toss1, "opponent": user2 })
+                    await self.channel_layer.send(user2_channel_name, {"type": "toss", "toss": toss2, "opponent": user1})
             else:
                 await self.send(text_data=json.dumps({"toss": "room_full"}))
                 return
@@ -84,7 +86,7 @@ class GameConsumer(AsyncWebsocketConsumer):
     async def toss(self, event):
         print(event["toss"])
         if event["toss"] == 0 or event["toss"] == 1:
-            await self.send(text_data = json.dumps({"toss" : event["toss"]}))
+            await self.send(text_data = json.dumps({"toss" : event["toss"], "opponent": event["opponent"]}))
 
 
 def get_active_players(room_name):
@@ -109,6 +111,10 @@ def remove_name(channel_name, room_name):
 def get_channel_name(id, room_name):
     player = Playing_User.objects.get(user_id=id, room_name= room_name)
     return player.channel_name
+
+def get_user_name(id, room_name):
+    player = Playing_User.objects.get(user_id=id, room_name= room_name)
+    return player.username
 
 
     

@@ -1,25 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends "./layout.html" %}
+{% load static %}
+{% block body %}
+
 <body>
-    <div class="message">
-        <h3 style="color: red;">
-            {% if message %}
-                <p>{{ message }}</p>
-            {% endif %}
-        </h3>
+
+    <img id="icon" src="{% static 'signup/images/whitequeen.png' %}" alt="">
+    <div class="container">
+        <div class="contents">
+            <form action="{% url 'signup:login' %}" method="post">
+                {% csrf_token %}
+                <input class="textbox" id="name" type="text" placeholder="Player Name" name="player_name">
+                <input class="textbox" id="pwd1" type="password" placeholder="Enter Password" name="password">
+                <input class="button" type="submit" value="Log In">
+            </form>
+
+        </div>
+
     </div>
-    <form action="{% url 'signup:login' %}" method="post">
-        {% csrf_token %}
-        <input type="text" id="player_name" name="player_name" placeholder="Player Name">
-        <input type="password" id="password" name="password" placeholder="Password">
-        <input type="submit" value="Log In" >
-    </form>
 
     <a href="{% url 'signup:signup' %}">New User? Click here to Sign up</a>
+    {% if message %}
+        <div class="message">
+            {{ message }}
+        </div>
+        <script>
+            let message_div = document.querySelector(".message");
+            message_div.style.visibility = "visible";
+        </script>
+    {% endif %}
+
 </body>
-</html>
+{% endblock %}

@@ -9,13 +9,12 @@ def signup(request):
     message = ""
     if request.method=='POST':
         name = request.POST.get('name')
-        email = request.POST.get('email')
         pwd1 = request.POST.get('password1')
         pwd2 = request.POST.get('password2')
         
         if(pwd1==pwd2):
-            print(name, email, pwd1)
-            user = User.objects.create_user(name, email, pwd1)
+            print(name, pwd1)
+            user = User.objects.create_user(username=name, password=pwd1)
             user.save()
             return redirect('signup:login')            
 
