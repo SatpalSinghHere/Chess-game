@@ -1,0 +1,22 @@
+version: '2.19.1'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - ./db.sqlite3:/app/db.sqlite3  # Persist the SQLite database file
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+    # env_file:
+    #   - .env
+  
+  redis:
+    image: redis:5
+    ports:
+      - "6379:6379"

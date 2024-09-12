@@ -18,9 +18,16 @@
         </div>
 
     </div>
-    <div class="message">
+    {% if message %}
+        <div class="message">
+            {{ message }}
+        </div>
+        <script>
+            let message_div = document.querySelector(".message");
+            message_div.style.visibility = "visible";
+        </script>
+    {% endif %}
 
-    </div>
 
 
 </body>

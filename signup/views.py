@@ -11,16 +11,20 @@ def signup(request):
         name = request.POST.get('name')
         pwd1 = request.POST.get('password1')
         pwd2 = request.POST.get('password2')
-        
-        if(pwd1==pwd2):
-            print(name, pwd1)
-            user = User.objects.create_user(username=name, password=pwd1)
-            user.save()
-            return redirect('signup:login')            
 
+        if User.objects.filter(username=name).exists():
+            message = "Username already exists"
+            print(message)
         else:
-            print("Password not matched")
-            message = "Password not matched"
+            if(pwd1==pwd2):
+                print(name, pwd1)
+                user = User.objects.create_user(username=name, password=pwd1)
+                user.save()
+                return redirect('signup:login')            
+
+            else:
+                print("Password not matched")
+                message = "Password not matched"
         
     return render(request, "signup/signup.html", {
         'message': message
