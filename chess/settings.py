@@ -69,15 +69,17 @@ TEMPLATES = [
         },
     },
 ]
-REDIS_HOST = 'redis'
-REDIS_PORT = 6379
+
+import os
+
+REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379/0')
 WSGI_APPLICATION = 'chess.wsgi.application'
 ASGI_APPLICATION = 'chess.asgi.application'
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis", "6379")],
+            "hosts": [REDIS_URL],
         },
     },
 }
