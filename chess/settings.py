@@ -57,6 +57,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://chess-game-x4o4.onrender.com',
+]
+
 ROOT_URLCONF = 'chess.urls'
 
 TEMPLATES = [
