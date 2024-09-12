@@ -910,7 +910,7 @@ document.addEventListener("DOMContentLoaded", () =>{
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
     const gameSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/game/' + roomName + '/'
+        'wss://' + window.location.host + '/ws/game/' + roomName + '/'
     );
 
     gameSocket.onopen = function(e) {
