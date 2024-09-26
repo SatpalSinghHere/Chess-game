@@ -969,8 +969,14 @@ document.addEventListener("DOMContentLoaded", () =>{
         }
         if(data.toss == 0){
             console.log("blacked");
+
             const board = document.querySelector(".board");
             board.style.flexDirection = "column-reverse";
+
+            const rowsList = document.querySelectorAll('.row')
+            rowsList.forEach((element) => {
+                element.style.flexDirection = "row-reverse";
+            })
             console.log("locked");
             lock.style.pointerEvents = "all";
         }
