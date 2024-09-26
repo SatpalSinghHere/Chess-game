@@ -58,7 +58,11 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://chess-game-x4o4.onrender.com',
+    'https://satpals-chess.onrender.com',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    'https://satpals-chess.onrender.com',
 ]
 
 ROOT_URLCONF = 'chess.urls'
