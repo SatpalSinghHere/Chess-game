@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-zr=^b)@wdwdp^(jm@j47ot*2@zo)k7tzd(&4&r2qx^2(&ali97
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'chess-game-x4o4.onrender.com',  # Add your Render domain here
+    'satpals-chess.onrender.com',  # Add your Render domain here
     'localhost',
     '127.0.0.1',
     # Add any other domains or IPs you need to allow
